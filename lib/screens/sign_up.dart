@@ -42,16 +42,40 @@ class SignupPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               // 이름 입력 필드
-              CustomTextField(label: '이름', textStyle: textFieldStyle),
+              CustomTextField(
+                label: '이름',
+                textStyle: textFieldStyle,
+                //width: 300, // 원하는 너비로 설정
+                height: 40, // 원하는 높이로 설정
+              ),
               SizedBox(height: 10),
               // 생년월일 입력 필드
-              CustomTextField(label: '생년월일', textStyle: textFieldStyle),
+              CustomTextField(
+                label: '생년월일',
+                textStyle: textFieldStyle,
+                //width: 300,
+                height: 40,
+              ),
               SizedBox(height: 10),
+
               // 아이디 입력 필드
-              CustomTextField(label: '아이디', hintText: '(example@google.com)', textStyle: textFieldStyle),
+              CustomTextField(
+                label: '아이디',
+                hintText: '(example@google.com)',
+                textStyle: textFieldStyle,
+                width: 300,
+                height: 50,
+              ),
+              SizedBox(height: 10),
               Row(
                 children: [
-                  Expanded(child: CustomTextField(label: '인증번호', textStyle: textFieldStyle)),
+                  Expanded(
+                    child: CustomTextField(
+                      label: '인증번호',
+                      textStyle: textFieldStyle,
+                      height: 50,
+                    ),
+                  ),
                   SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () {},
@@ -63,7 +87,13 @@ class SignupPage extends StatelessWidget {
               // 인증번호 입력 필드
               Row(
                 children: [
-                  Expanded(child: CustomTextField(label: '인증번호', textStyle: textFieldStyle)),
+                  Expanded(
+                    child: CustomTextField(
+                      label: '인증번호',
+                      textStyle: textFieldStyle,
+                      height: 50,
+                    ),
+                  ),
                   SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () {},
@@ -75,7 +105,14 @@ class SignupPage extends StatelessWidget {
               // 비밀번호 입력 필드
               Row(
                 children: [
-                  Expanded(child: CustomTextField(label: '비밀번호', obscureText: true, textStyle: textFieldStyle)),
+                  Expanded(
+                    child: CustomTextField(
+                      label: '비밀번호',
+                      obscureText: true,
+                      textStyle: textFieldStyle,
+                      height: 50,
+                    ),
+                  ),
                   SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () {},
@@ -90,10 +127,21 @@ class SignupPage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               // 비밀번호 확인 입력 필드
-              CustomTextField(label: '비밀번호 확인', obscureText: true, textStyle: textFieldStyle),
+              CustomTextField(
+                label: '비밀번호 확인',
+                obscureText: true,
+                textStyle: textFieldStyle,
+                width: 300,
+                height: 50,
+              ),
               SizedBox(height: 10),
               // 제1트랙 입력 필드
-              CustomTextField(label: '제 1트랙', textStyle: textFieldStyle),
+              CustomTextField(
+                label: '제 1트랙',
+                textStyle: textFieldStyle,
+                width: 300,
+                height: 50,
+              ),
               SizedBox(height: 20),
               // 회원가입 버튼
               ElevatedButton(
@@ -135,27 +183,35 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final bool obscureText;
   final TextStyle textStyle; // 텍스트 필드의 스타일을 위한 변수
+  final double? width;
+  final double? height;
 
   CustomTextField({
     required this.label,
     this.hintText,
     this.obscureText = false,
     required this.textStyle,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      obscureText: obscureText,
-      style: textStyle, // 전달된 텍스트 스타일 적용
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+    return Container(
+      width: width,   // 너비 설정
+      height: height, // 높이 설정
+      child: TextFormField(
+        obscureText: obscureText,
+        style: textStyle,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hintText,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          filled: true,
+          fillColor: Colors.white,
         ),
-        filled: true,
-        fillColor: Colors.white,
       ),
     );
   }
