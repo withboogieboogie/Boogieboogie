@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'chat_page.dart'; // 메인 화면 가져오기
 import 'sign_up.dart';
 
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -16,19 +14,24 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
-    // 로그인 버튼 로직
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ChatPage()),
+      MaterialPageRoute(builder: (context) => const ChatPage()), // const 확인 필요
     );
   }
 
   void _signup() {
-    // 회원가입 버튼 로직
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const SignupPage()),
+      MaterialPageRoute(builder: (context) => const SignupPage()), // const 확인 필요
     );
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -37,18 +40,16 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: const Color(0xFF1C4A90),
       appBar: AppBar(
         backgroundColor: const Color(0xFF1C4A90),
-        elevation: 0, // AppBar 그림자 제거
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 125.0, left: 16.0, right: 16.0),
         child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.start, // Column을 위쪽 정렬
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // 로고 이미지
             Image.asset(
-              'assets/splash.png', // 실제 이미지 경로로 변경
+              'assets/splash.png',
               height: 300,
             ),
             const SizedBox(height: 0),
@@ -62,16 +63,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 30),
-
-            // 회원가입 및 로그인 버튼
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _signup,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3263AF), // 버튼 배경색
-                    foregroundColor: Colors.white, // 버튼 텍스트 색상
+                    backgroundColor: const Color(0xFF3263AF),
+                    foregroundColor: Colors.white,
                     minimumSize: const Size(150, 65),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -84,19 +83,18 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     '회원가입',
                     style: TextStyle(
-                      fontSize: 19, // 텍스트 크기 조정
-                      fontWeight: FontWeight.bold, // 필요 시 텍스트 굵기 조정
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-
                 const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF767676), // 로그인 버튼 배경색
-                    foregroundColor: Colors.white, // 로그인 버튼 텍스트 색상
-                    minimumSize: const Size(150,65),
+                    backgroundColor: const Color(0xFF767676),
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(150, 65),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -108,14 +106,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     '로그인',
                     style: TextStyle(
-                      fontSize: 19, // 텍스트 크기 조정
-                      fontWeight: FontWeight.bold, // 필요 시 텍스트 굵기 조정
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ],
             ),
-
           ],
         ),
       ),

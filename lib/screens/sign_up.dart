@@ -24,11 +24,12 @@ class SignupPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(width: 15), // 좌측 여백
                   Image.asset(
                     'assets/splash.png', // 로고 파일 경로 설정
-                    height: 150,
+                    height: 140,
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 0), // 로고와 텍스트 사이의 간격 조정
                   Text(
                     '부기부기',
                     style: TextStyle(
@@ -38,6 +39,7 @@ class SignupPage extends StatelessWidget {
                       fontFamily: 'MainFont', // 원하는 폰트 설정
                     ),
                   ),
+                  SizedBox(width: 40), // 우측 여백
                 ],
               ),
               SizedBox(height: 20),
@@ -45,64 +47,80 @@ class SignupPage extends StatelessWidget {
               CustomTextField(
                 label: '이름',
                 textStyle: textFieldStyle,
-                //width: 300, // 원하는 너비로 설정
-                height: 40, // 원하는 높이로 설정
+                height: 40,
               ),
               SizedBox(height: 10),
               // 생년월일 입력 필드
               CustomTextField(
                 label: '생년월일',
                 textStyle: textFieldStyle,
-                //width: 300,
                 height: 40,
               ),
               SizedBox(height: 10),
-
               // 아이디 입력 필드
               CustomTextField(
                 label: '아이디',
                 hintText: '(example@google.com)',
                 textStyle: textFieldStyle,
-                width: 300,
-                height: 50,
+                height: 40,
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 7),
               Row(
                 children: [
                   Expanded(
                     child: CustomTextField(
                       label: '인증번호',
                       textStyle: textFieldStyle,
-                      height: 50,
+                      height: 40,
                     ),
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE7E7E7), // 버튼 배경색
+                      foregroundColor: const Color(0xFF888888), // 텍스트 색상
+                      shadowColor: Colors.grey, // 그림자 색상
+                      elevation: 5, // 그림자 깊이
+                      fixedSize: Size(100, 40),
+                      //adding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15), // 둥근 모서리
+                      ),
+                    ),
                     onPressed: () {},
                     child: Text('인증번호'),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              // 인증번호 입력 필드
+              SizedBox(height: 3),
               Row(
                 children: [
                   Expanded(
                     child: CustomTextField(
                       label: '인증번호',
                       textStyle: textFieldStyle,
-                      height: 50,
+                      height: 40,
                     ),
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE7E7E7), // 버튼 배경색
+                      foregroundColor: const Color(0xFF888888), // 텍스트 색상
+                      shadowColor: Colors.grey, // 그림자 색상
+                      elevation: 5, // 그림자 깊이
+                      fixedSize: Size(100, 40), //버튼 크기
+                      //adding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15), // 둥근 모서리
+                      ),
+                    ),
                     onPressed: () {},
                     child: Text('확인'),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              // 비밀번호 입력 필드
+              SizedBox(height: 3),
               Row(
                 children: [
                   Expanded(
@@ -110,7 +128,7 @@ class SignupPage extends StatelessWidget {
                       label: '비밀번호',
                       obscureText: true,
                       textStyle: textFieldStyle,
-                      height: 50,
+                      height: 40,
                     ),
                   ),
                   SizedBox(width: 8),
@@ -125,35 +143,29 @@ class SignupPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              // 비밀번호 확인 입력 필드
+              SizedBox(height: 7),
               CustomTextField(
                 label: '비밀번호 확인',
                 obscureText: true,
                 textStyle: textFieldStyle,
-                width: 300,
-                height: 50,
+                height: 40,
               ),
               SizedBox(height: 10),
-              // 제1트랙 입력 필드
               CustomTextField(
                 label: '제 1트랙',
                 textStyle: textFieldStyle,
-                width: 300,
-                height: 50,
+                height: 40,
               ),
               SizedBox(height: 20),
-              // 회원가입 버튼
               ElevatedButton(
                 onPressed: () {
-                  // 회원가입 버튼을 누르면 LoginPage로 돌아감
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // 버튼 색상
+                  backgroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -176,13 +188,12 @@ class SignupPage extends StatelessWidget {
   }
 }
 
-
 // 커스텀 텍스트 필드 위젯
 class CustomTextField extends StatelessWidget {
   final String label;
   final String? hintText;
   final bool obscureText;
-  final TextStyle textStyle; // 텍스트 필드의 스타일을 위한 변수
+  final TextStyle textStyle;
   final double? width;
   final double? height;
 
@@ -198,19 +209,22 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,   // 너비 설정
-      height: height, // 높이 설정
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.0), // 둥근 모서리 설정
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16), // 텍스트 필드 안쪽 여백
+      alignment: Alignment.center,
       child: TextFormField(
         obscureText: obscureText,
         style: textStyle,
         decoration: InputDecoration(
           labelText: label,
           hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          filled: true,
-          fillColor: Colors.white,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          border: InputBorder.none, // 기본 테두리 제거
         ),
       ),
     );
