@@ -79,211 +79,229 @@ class _ChatPageState extends State<ChatPage> {
     final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+        backgroundColor: Colors.white,
+        body: Column(
         children: [
-          // 상단 파란색 바
-          Container(
-            color: const Color(0xFF1C4A90),
-            height: 50,
-          ),
-          // 조건에 따른 캐릭터 이미지 및 채팅창 표시 여부
-          if (isKeyboardVisible && !_isExpanded) // 키보드가 올라와 있고 채팅창이 축소된 상태일 때는 캐릭터만 표시
-            Expanded(
-              flex: 7,
-              child: Center(
-                child: Image.asset(
-                  'assets/character.png', // 캐릭터 이미지 경로 확인
-                  height: 150,
-                ),
-              ),
-            )
-          else if (!isKeyboardVisible && !_isExpanded) // 키보드가 내려가 있고 채팅창이 축소된 상태일 때 일부 채팅과 캐릭터 모두 표시
-            Expanded(
-              flex: 5,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Center(
-                      child: Image.asset(
-                        'assets/character.png',
-                        height: 150,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: _messages.length,
-                        itemBuilder: (context, index) {
-                          final messageData = _messages[index];
-                          final isUserMessage = messageData["sender"] == "user";
+        // 상단 파란색 바
+        Container(
+        color: const Color(0xFF1C4A90),
+    height: 50,
+    ),
+    // 조건에 따른 캐릭터 이미지 및 채팅창 표시 여부
+    if (isKeyboardVisible && !_isExpanded) // 키보드가 올라와 있고 채팅창이 축소된 상태일 때는 캐릭터만 표시
+    Expanded(
+    flex: 7,
+    child: Center(
+    child: Image.asset(
+    'assets/character.png', // 캐릭터 이미지 경로 확인
+    height: 150,
+    ),
+    ),
+    )
+    else if (!isKeyboardVisible && !_isExpanded) // 키보드가 내려가 있고 채팅창이 축소된 상태일 때 일부 채팅과 캐릭터 모두 표시
+    Expanded(
+    flex: 5,
+    child: Column(
+    children: [
+    Expanded(
+    flex: 3,
+    child: Center(
+    child: Image.asset(
+    'assets/character.png',
+    height: 150,
+    ),
+    ),
+    ),
+    Expanded(
+    flex: 2,
+    child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: ListView.builder(
+    controller: _scrollController,
+    itemCount: _messages.length,
+    itemBuilder: (context, index) {
+    final messageData = _messages[index];
+    final isUserMessage = messageData["sender"] == "user";
 
-                          return Align(
-                            alignment: isUserMessage
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(vertical: 4),
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                messageData["message"] ?? "",
-                                style: TextStyle(
-                                  color: isUserMessage ? Colors.white : Colors.black,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          else if (!isKeyboardVisible && _isExpanded) // 키보드가 내려가 있고 채팅창이 확장된 상태일 때 캐릭터 숨기기
-              Expanded(
-                flex: 10,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    itemCount: _messages.length,
-                    itemBuilder: (context, index) {
-                      final messageData = _messages[index];
-                      final isUserMessage = messageData["sender"] == "user";
+    return Align(
+    alignment: isUserMessage
+    ? Alignment.centerRight
+        : Alignment.centerLeft,
+    child: Container(
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+    color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
+    borderRadius: BorderRadius.circular(12),
+    ),
+    child: Text(
+    messageData["message"] ?? "",
+    style: TextStyle(
+    color: isUserMessage ? Colors.white : Colors.black,
+    ),
+    ),
+    ),
+    );
+    },
+    ),
+    ),
+    ),
+    ],
+    ),
+    )
+    else if (!isKeyboardVisible && _isExpanded) // 키보드가 내려가 있고 채팅창이 확장된 상태일 때 캐릭터 숨기기
+    Expanded(
+    flex: 10,
+    child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: ListView.builder(
+    controller: _scrollController,
+    itemCount: _messages.length,
+    itemBuilder: (context, index) {
+    final messageData = _messages[index];
+    final isUserMessage = messageData["sender"] == "user";
 
-                      return Align(
-                        alignment: isUserMessage
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 4),
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            messageData["message"] ?? "",
-                            style: TextStyle(
-                              color: isUserMessage ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              )
-            else if (isKeyboardVisible && _isExpanded) // 키보드가 올라오고 채팅창이 확장된 상태일 때 확장된 채팅창만 표시
-                Expanded(
-                  flex: 10,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: _messages.length,
-                      itemBuilder: (context, index) {
-                        final messageData = _messages[index];
-                        final isUserMessage = messageData["sender"] == "user";
+    return Align(
+    alignment: isUserMessage
+    ? Alignment.centerRight
+        : Alignment.centerLeft,
+    child: Container(
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+    color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
+    borderRadius: BorderRadius.circular(12),
+    ),
+    child: Text(
+    messageData["message"] ?? "",
+    style: TextStyle(
+    color: isUserMessage ? Colors.white : Colors.black,
+    ),
+    ),
+    ),
+    );
+    },
+    ),
+    ),
+    )
+    else if (isKeyboardVisible && _isExpanded) // 키보드가 올라오고 채팅창이 확장된 상태일 때 확장된 채팅창만 표시
+    Expanded(
+    flex: 10,
+    child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: ListView.builder(
+    controller: _scrollController,
+    itemCount: _messages.length,
+    itemBuilder: (context, index) {
+    final messageData = _messages[index];
+    final isUserMessage = messageData["sender"] == "user";
 
-                        return Align(
-                          alignment: isUserMessage
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 4),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              messageData["message"] ?? "",
-                              style: TextStyle(
-                                color: isUserMessage ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                _isExpanded = !_isExpanded;
-              });
-            },
-            child: Container(
-              color: Colors.grey[300],
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Center(
-                child: Icon(
-                  _isExpanded ? Icons.expand_more : Icons.expand_less,
-                  color: const Color(0xFF1C4A90),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    decoration: const InputDecoration(
-                      hintText: '메시지를 입력하세요',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                    onSubmitted: (_) => _sendMessage(),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send, color: Color(0xFF1C4A90)),
-                  onPressed: _sendMessage,
-                ),
-              ],
-            ),
-          ),
-        ],
+    return Align(
+    alignment: isUserMessage
+    ? Alignment.centerRight
+        : Alignment.centerLeft,
+    child: Container(
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+    color: isUserMessage ? const Color(0xFF1C4A90) : Colors.grey[300],
+    borderRadius: BorderRadius.circular(12),
+    ),
+    child: Text(
+    messageData["message"] ?? "",
+    style: TextStyle(
+    color: isUserMessage ? Colors.white : Colors.black,
+    ),
+    ),
+    ),
+    );
+    },
+    ),
+    ),
+    ),
+    GestureDetector(
+    onTap: () {
+    setState(() {
+    _isExpanded = !_isExpanded;
+    });
+    },
+    child: Container(
+    color: Colors.grey[300],
+    width: double.infinity,
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Center(
+    child: Icon(
+    _isExpanded ? Icons.expand_more : Icons.expand_less,
+    color: const Color(0xFF1C4A90),
+    ),
+    ),
+    ),
+    ),
+    Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+    children: [
+    Expanded(
+    child: TextField(
+    controller: _controller,
+    focusNode: _focusNode,
+    decoration: const InputDecoration(
+    hintText: '메시지를 입력하세요',
+    border: InputBorder.none,
+    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+    ),
+    onSubmitted: (_) => _sendMessage(),
+    ),
+    ),
+    IconButton(
+    icon: const Icon(Icons.send, color: Color(0xFF1C4A90)),
+    onPressed: _sendMessage,
+    ),
+    ],
+    ),
+    ),
+    ],
+    ),
+    bottomNavigationBar: Stack(
+    alignment: Alignment.center,
+    children: [
+    BottomNavigationBar(
+    currentIndex: _selectedIndex,
+    onTap: _onItemTapped,
+    selectedItemColor: const Color(0xFF1C4A90),
+    items: [
+    BottomNavigationBarItem(
+    icon: const Icon(Icons.person),
+    label: '마이페이지',
+    ),
+    BottomNavigationBarItem(
+    icon: Container(), // 가운데 공간 확보를 위해 빈 컨테이너 사용
+    label: '',
+    ),
+    BottomNavigationBarItem(
+    icon: const Icon(Icons.calendar_today),
+    label: '일일미션',
+    ),
+    ],
+    ),
+    Positioned(
+    bottom: 10, // 네비게이션 바 위에 위치
+    child: FloatingActionButton(
+    onPressed: () {
+    setState(() {
+    _selectedIndex = 1;
+    });
+    },
+    backgroundColor: Colors.white,
+      child: Image.asset(
+        'assets/chat.png', // 이미지 경로 확인
+        width: 40,
+        height: 40,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: const Color(0xFF1C4A90),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: '마이페이지',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('android/app/src/main/res/drawable-hdpi/splash.png'), // 이미지 경로 확인
-              size: 30,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.calendar_today),
-            label: '일일미션',
-          ),
-        ],
-      ),
+    ),
+    ),
+    ],
+    ),
     );
   }
 }
@@ -300,6 +318,7 @@ class MyPage extends StatelessWidget {
     );
   }
 }
+
 class MissionPage extends StatelessWidget {
   const MissionPage({super.key});
 
@@ -311,3 +330,4 @@ class MissionPage extends StatelessWidget {
     );
   }
 }
+

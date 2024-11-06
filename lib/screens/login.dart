@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'chat_page.dart'; // 메인 화면 가져오기
+import 'sign_up.dart';
 
 
 
@@ -15,10 +16,18 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
-    // 로그인 로직 추가
+    // 로그인 버튼 로직
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const ChatPage()),
+    );
+  }
+
+  void _signup() {
+    // 회원가입 버튼 로직
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SignupPage()),
     );
   }
 
@@ -59,9 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // 회원가입 버튼 로직 추가 (예: 회원가입 화면으로 이동)
-                  },
+                  onPressed: _signup,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF3263AF), // 버튼 배경색
                     foregroundColor: Colors.white, // 버튼 텍스트 색상

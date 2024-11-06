@@ -62,7 +62,9 @@ flutter:
 
   assets:
     - assets/splash.png
-    - assets/loading.json  # 추가하려는 다른 파일도 여기에 나열
+    - assets/loading.json
+    - assets/chat.png
+    # 추가하려는 다른 파일도 여기에 나열
   fonts:
     - family: MainFont
       fonts:
