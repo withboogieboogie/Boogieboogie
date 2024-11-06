@@ -16,7 +16,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
     Widget page;
     if (index == 0) {
-      page = const MyPage();
+      page =  MyPage();
     } else if (index == 1) {
       page = const ChatPage();
     } else {

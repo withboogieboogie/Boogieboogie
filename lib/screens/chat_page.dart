@@ -34,7 +34,7 @@ class _ChatPageState extends State<ChatPage> {
     if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const MyPage()),
+        MaterialPageRoute(builder: (context) =>  MyPage()),
       );
     } else if (index == 2) {
       Navigator.push(
